@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a **quantum emotion classifier** project that will use PennyLane for quantum machine learning to classify text emotions. The project is currently in initial setup phase.
 
 **Key Technologies:**
+
 - Python 3.14rc3 (bleeding edge)
 - uv package manager (Rust-powered, 10-100x faster than pip)
 - PennyLane for quantum ML
@@ -65,10 +66,7 @@ Essential packages to install:
 
 ```bash
 # Core quantum ML stack
-uv add pennylane torch numpy scikit-learn matplotlib
-
-# PyTorch with Metal Performance Shaders (Apple Silicon)
-uv add torch torchvision --index-url https://download.pytorch.org/whl/nightly/cpu
+uv add pennylane torch torchvision numpy scikit-learn matplotlib
 
 # Development tools
 uv add --dev pytest pytest-cov black ruff mypy
@@ -83,6 +81,7 @@ uv add --optional jupyter ipywidgets plotly
 ## Key Commands
 
 ### Development Workflow
+
 ```bash
 # Add dependencies
 uv add package_name
@@ -105,6 +104,7 @@ uv run python experiments/scaling_analysis.py
 ```
 
 ### Testing Commands
+
 ```bash
 # Run all tests with coverage
 uv run pytest --cov=quantum_emotion tests/
@@ -152,6 +152,7 @@ class HybridModel(torch.nn.Module):
 ## Quantum Advantage Strategy
 
 **Exponential Feature Compression**: Process text in 2^n dimensional Hilbert space using only n qubits
+
 - Example: 20 qubits → 2^20 = 1,048,576 dimensional space
 - Classical equivalent would need 1M+ parameters
 - Quantum uses ~80 parameters (20 qubits × 4 rotation angles)
@@ -159,10 +160,10 @@ class HybridModel(torch.nn.Module):
 ## Performance Targets
 
 | Configuration | Qubits | Hilbert Dimension | Parameters | Target Accuracy |
-|--------------|--------|-------------------|------------|-----------------|
-| Desktop Demo | 10 | 1,024 | ~40 | 85%+ |
-| Full Scale | 20 | 1,048,576 | ~80 | 90%+ |
-| Maximum | 28 | 268M+ | ~112 | 92%+ |
+| ------------- | ------ | ----------------- | ---------- | --------------- |
+| Desktop Demo  | 10     | 1,024             | ~40        | 85%+            |
+| Full Scale    | 20     | 1,048,576         | ~80        | 90%+            |
+| Maximum       | 28     | 268M+             | ~112       | 92%+            |
 
 ## Python 3.14 Features to Leverage
 
@@ -194,6 +195,7 @@ os.environ['OMP_NUM_THREADS'] = '10'  # M3 Pro has 10 performance cores
 ## Data Requirements
 
 **Training Data Format**:
+
 ```csv
 text,emotion
 "I am so happy today!",0  # Happy
